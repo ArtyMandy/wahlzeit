@@ -1,4 +1,4 @@
-w/*Author: Artur Mandybura, https://github.com/ArtyMandy/wahlzeit
+/*Author: Artur Mandybura, https://github.com/ArtyMandy/wahlzeit
  *
  * Class: ServicesTestSuite
  *
