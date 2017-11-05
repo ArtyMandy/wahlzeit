@@ -1,10 +1,10 @@
 /*Author: Artur Mandybura, https://github.com/ArtyMandy/wahlzeit
  *
- * Class: Location
+ * Class: AllTestSuite
  *
- *Version information: adap-cw03  
+ *Version information: adap-cw04
  *
- * Date: 26. Oct. 2017
+ * Date: 4. Oct. 2017
  *
  * This file is part of the Wahlzeit photo rating application.
  *
@@ -22,45 +22,16 @@
  * License along with this program. If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package org.wahlzeit.model;
+import org.junit.runner.*;
+import org.junit.runners.*;
 
-import java.util.Objects;
-
-public class Location {
-	
-	private Coordinate coordinate;
-
-	public Location(Coordinate coordinate) {
-		this.coordinate = coordinate;
-	}
-	
-	/**
-	 * @methodtype get
-	 */
-	public Coordinate getCoordinate() {
-		return this.coordinate;
-	}
-	
-	/**
-	 * @methodtype set
-	 */
-	public void setCoordinate(Coordinate c) {
-		this.coordinate = c;
-	}
-	
-	@Override
-	public boolean equals(Object inputLocation) {
-		if(!(inputLocation instanceof Location)) {
-			return false;
-		}
-		Location loc = (Location)inputLocation;
-		return this.coordinate.equals(loc.coordinate);
-	}
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(this.coordinate);
-	}
-
-	
+@RunWith(Suite.class)
+@Suite.SuiteClasses({
+	org.wahlzeit.handlers.HandlerTestSuite.class,
+	org.wahlzeit.model.ModelTestSuite.class,
+	org.wahlzeit.services.ServicesTestSuite.class,
+	org.wahlzeit.utils.UtilsTestSuite.class
+})
+public class AllTestSuite {
+	/** do nothing **/
 }

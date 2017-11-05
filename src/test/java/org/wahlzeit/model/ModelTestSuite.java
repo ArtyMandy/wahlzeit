@@ -1,10 +1,10 @@
 /*Author: Artur Mandybura, https://github.com/ArtyMandy/wahlzeit
  *
- * Class: Location
+ * Class: ModelTestSuite
  *
- *Version information: adap-cw03  
+ *Version information: adap-cw04
  *
- * Date: 26. Oct. 2017
+ * Date: 4. Nov. 2017
  *
  * This file is part of the Wahlzeit photo rating application.
  *
@@ -24,43 +24,27 @@
  */
 package org.wahlzeit.model;
 
-import java.util.Objects;
+import org.junit.runner.*;
+import org.junit.runners.*;
 
-public class Location {
+@RunWith(Suite.class)
+@Suite.SuiteClasses({
 	
-	private Coordinate coordinate;
+	org.wahlzeit.model.persistence.AbstractAdapterTest.class,
+	org.wahlzeit.model.persistence.DatastoreAdapterTest.class,
+	org.wahlzeit.model.AccessRightsTest.class,
+	org.wahlzeit.model.CoordinateTest.class,
+	org.wahlzeit.model.FlagReasonTest.class,
+	org.wahlzeit.model.GenderTest.class,
+	org.wahlzeit.model.GuestTest.class,
+	org.wahlzeit.model.LocationTest.class,
+	org.wahlzeit.model.PhotoFilterTest.class,
+	org.wahlzeit.model.TagsTest.class,
+	org.wahlzeit.model.UserStatusTest.class,
+	org.wahlzeit.model.ValueTest.class
+	
+})
 
-	public Location(Coordinate coordinate) {
-		this.coordinate = coordinate;
-	}
-	
-	/**
-	 * @methodtype get
-	 */
-	public Coordinate getCoordinate() {
-		return this.coordinate;
-	}
-	
-	/**
-	 * @methodtype set
-	 */
-	public void setCoordinate(Coordinate c) {
-		this.coordinate = c;
-	}
-	
-	@Override
-	public boolean equals(Object inputLocation) {
-		if(!(inputLocation instanceof Location)) {
-			return false;
-		}
-		Location loc = (Location)inputLocation;
-		return this.coordinate.equals(loc.coordinate);
-	}
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(this.coordinate);
-	}
-
-	
+public class ModelTestSuite {
+	/** do nothing **/
 }

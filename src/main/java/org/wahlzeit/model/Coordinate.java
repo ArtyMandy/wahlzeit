@@ -24,11 +24,15 @@
  */
 package org.wahlzeit.model;
 
+import java.util.Objects;
+
 public class Coordinate {
 	
+	private static final double DELTA = 0.0000001; 
 	private double x;
 	private double y;
 	private double z;
+	
 	
 	public Coordinate(double x, double y, double z) {
 		this.x = x;
@@ -55,25 +59,49 @@ public class Coordinate {
 	public double getZ() {
 		return this.z;
 	}
+	/**
+	 * @methodtype set
+	 */
+	public double setX(double x) {
+		return this.x = x;
+	}
+	
+	/**
+	 * @methodtype set
+	 */
+	public double setY(double y) {
+		return this.y = y;
+	}
+	
+	/**
+	 * @methodtype set
+	 */
+	public double getZ(double z) {
+		return this.z = z;
+	}
+	
 	public double getDistance(Coordinate inputCoordinate) {
-		double distance;	
-		distance = Math.pow((inputCoordinate.x - x), 2) + Math.pow((inputCoordinate.y - y), 2) + Math.pow((inputCoordinate.z - z), 2);
-		return Math.sqrt(distance);
+			double distance;	
+			distance = Math.pow((inputCoordinate.x - x), 2) + Math.pow((inputCoordinate.y - y), 2) + Math.pow((inputCoordinate.z - z), 2);
+			return Math.sqrt(distance);	
 	}
 	
 	private boolean isEqual(Coordinate inputCoordinate) {
-		if(this.x == inputCoordinate.x && this.x == inputCoordinate.y && this.z == inputCoordinate.z) {
-			return true;
+		if(inputCoordinate != null
+				&& Math.abs(inputCoordinate.x - this.x) <= DELTA 
+				&& Math.abs(inputCoordinate.y - this.y) <= DELTA
+				&& Math.abs(inputCoordinate.z - this.z) <= DELTA) {
+			return true;		
 		}
-		else
-			return false;
+		return false;
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(x, y, z);
 	}
 	
 	@Override
 	public boolean equals(Object inputCoordinate) {
-		if(inputCoordinate == null) {
-			return false;
-		}
 		if(!(inputCoordinate instanceof Coordinate)) {
 			return false;
 		}
