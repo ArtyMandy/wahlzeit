@@ -20,6 +20,8 @@
 
 package org.wahlzeit.main;
 
+import org.wahlzeit.model.CigaretteFactory;
+import org.wahlzeit.model.CigaretteManager;
 import org.wahlzeit.model.GlobalsManager;
 import org.wahlzeit.model.PhotoCaseManager;
 import org.wahlzeit.model.PhotoFactory;
@@ -60,10 +62,13 @@ public abstract class ModelMain extends AbstractMain {
 		UserManager.getInstance().init();
 
 		log.config(LogBuilder.createSystemMessage().addAction("init PhotoFactory").toString());
-		PhotoFactory.initialize();
+		//PhotoFactory.initialize();
+		log.config(LogBuilder.createSystemMessage().addAction("init CigaretteFactory").toString());
+		CigaretteFactory.initialize();
 
 		log.config(LogBuilder.createSystemMessage().addAction("load Photos").toString());
-		PhotoManager.getInstance().init();
+		//PhotoManager.getInstance().init();
+		CigaretteManager.getInstance().init();
 	}
 
 

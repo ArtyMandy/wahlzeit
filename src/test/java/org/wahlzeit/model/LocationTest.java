@@ -27,6 +27,7 @@ package org.wahlzeit.model;
 
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -66,5 +67,10 @@ public class LocationTest {
 		assertTrue(l1.equals(l5));
 		assertTrue(l1.equals(l1));
 		
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void locationCreatedWithNull() {
+		Location l = new Location(null);
 	}
 }

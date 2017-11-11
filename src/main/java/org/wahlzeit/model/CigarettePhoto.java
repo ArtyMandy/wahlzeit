@@ -1,10 +1,10 @@
 /*Author: Artur Mandybura, https://github.com/ArtyMandy/wahlzeit
  *
- * Class: Location
+ *Class: CigarettePhoto
  *
- *Version information: adap-cw03  
+ *Version information: adap-cw05  
  *
- * Date: 26. Oct. 2017
+ * Date: 8. Nov. 2017
  *
  * This file is part of the Wahlzeit photo rating application.
  *
@@ -24,46 +24,58 @@
  */
 package org.wahlzeit.model;
 
-import java.util.Objects;
+import com.googlecode.objectify.annotation.Entity;
 
-public class Location {
+@Entity
+public class CigarettePhoto extends Photo {
 	
-	private Coordinate coordinate;
-
-	public Location(Coordinate coordinate) {
-		if(coordinate == null) {
-			throw new IllegalArgumentException();
-		}
-		this.coordinate = coordinate;
+	private String brand;
+	private String manufacturer;
+	
+	/**
+	 * @MethodType constructor
+	 */
+	public CigarettePhoto() {
+		super();
 	}
 	
 	/**
-	 * @methodtype get
+	 * @MethodType constructor
 	 */
-	public Coordinate getCoordinate() {
-		return this.coordinate;
+	public CigarettePhoto(PhotoId myId) {
+		super(myId);
 	}
 	
 	/**
-	 * @methodtype set
+	 * @MethodType get
 	 */
-	public void setCoordinate(Coordinate c) {
-		this.coordinate = c;
+	public String getBrand() {
+		return this.brand;
+	}
+	/**
+	 * @MethodType get
+	 */
+	public String getManufacturer() {
+		return this.manufacturer;
 	}
 	
-	@Override
-	public boolean equals(Object inputLocation) {
-		if(!(inputLocation instanceof Location)) {
-			return false;
+	
+	/**
+	 * @MethodType set
+	 */
+	public void setBrand(String brand) {
+		if(brand != null) {
+			this.brand = brand;
 		}
-		Location loc = (Location)inputLocation;
-		return this.coordinate.equals(loc.coordinate);
+	}
+	/**
+	 * @MethodType set
+	 */
+	public void setManufacturer(String manufacturer) {
+		if(manufacturer != null) {
+			this.manufacturer = manufacturer;
+		}
 	}
 	
-	@Override
-	public int hashCode() {
-		return Objects.hash(this.coordinate);
-	}
 
-	
 }

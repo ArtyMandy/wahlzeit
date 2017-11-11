@@ -48,6 +48,7 @@ public class PhotoFactory {
 	public static void initialize() {
 		getInstance(); // drops result due to getInstance() side-effects
 	}
+	
 
 	/**
 	 * Public singleton access method.
