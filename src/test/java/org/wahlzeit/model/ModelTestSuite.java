@@ -30,8 +30,6 @@ import org.junit.runners.*;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
 	
-	org.wahlzeit.model.persistence.AbstractAdapterTest.class,
-	org.wahlzeit.model.persistence.DatastoreAdapterTest.class,
 	org.wahlzeit.model.AccessRightsTest.class,
 	org.wahlzeit.model.CoordinateTest.class,
 	org.wahlzeit.model.FlagReasonTest.class,
@@ -41,7 +39,11 @@ import org.junit.runners.*;
 	org.wahlzeit.model.PhotoFilterTest.class,
 	org.wahlzeit.model.TagsTest.class,
 	org.wahlzeit.model.UserStatusTest.class,
-	org.wahlzeit.model.ValueTest.class
+	org.wahlzeit.model.ValueTest.class,
+	org.wahlzeit.model.CigaretteManagerTest.class,
+	org.wahlzeit.model.CigaretteFactoryTest.class,
+	org.wahlzeit.model.CigarettePhotoTest.class,
+	org.wahlzeit.model.persistence.PersistenceTestSuite.class
 	
 })
 

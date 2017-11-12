@@ -29,9 +29,9 @@ import org.junit.runners.*;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-	org.wahlzeit.services.mailing.EmailServiceTest.class,
 	org.wahlzeit.services.EmailAddressTest.class,
-	org.wahlzeit.services.LogBuilderTest.class	
+	org.wahlzeit.services.LogBuilderTest.class,
+	org.wahlzeit.services.mailing.MailingTestSuite.class
 })
 
 public class ServicesTestSuite {

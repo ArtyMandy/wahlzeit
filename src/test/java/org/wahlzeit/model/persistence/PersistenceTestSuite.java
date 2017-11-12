@@ -1,10 +1,10 @@
 /*Author: Artur Mandybura, https://github.com/ArtyMandy/wahlzeit
  *
- *Class: CigaretteManager
+ * Class: PersistenceTestSuite
  *
- *Version information: adap-cw05  
+ *Version information: adap-cw05
  *
- * Date: 8. Nov. 2017
+ * Date: 12. Nov. 2017
  *
  * This file is part of the Wahlzeit photo rating application.
  *
@@ -22,18 +22,17 @@
  * License along with this program. If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package org.wahlzeit.model;
+package org.wahlzeit.model.persistence;
 
-public class CigaretteManager extends PhotoManager {
+import org.junit.runner.*;
+import org.junit.runners.*;
 
-	protected static final CigaretteManager instance = new CigaretteManager();
-	/**
-	 * 
-	 * MethodType: get
-	 */
-	public static CigaretteManager getInstance() {
-		return instance;
-	}
+@RunWith(Suite.class)
+@Suite.SuiteClasses({
+	org.wahlzeit.model.persistence.AbstractAdapterTest.class,
+	org.wahlzeit.model.persistence.DatastoreAdapterTest.class,
+})
 
-	
+public class PersistenceTestSuite {
+	/** do nothing **/
 }
