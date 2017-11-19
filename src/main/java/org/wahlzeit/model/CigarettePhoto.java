@@ -24,9 +24,12 @@
  */
 package org.wahlzeit.model;
 
-import com.googlecode.objectify.annotation.Entity;
 
-@Entity
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Subclass;
+
+
+@Subclass
 public class CigarettePhoto extends Photo {
 	
 	private String brand;
@@ -45,6 +48,15 @@ public class CigarettePhoto extends Photo {
 	public CigarettePhoto(PhotoId myId) {
 		super(myId);
 	}
+	
+	/**
+	 * @MethodType constructor
+	 */
+//	public CigarettePhoto(PhotoId myId, String brand, String manufacturer) {
+//		this.brand = brand;
+//		this.
+//		super(myId)
+//	}
 	
 	/**
 	 * @MethodType get

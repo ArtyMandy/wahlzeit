@@ -24,16 +24,29 @@
  */
 package org.wahlzeit.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.logging.Logger;
+
+import org.wahlzeit.services.LogBuilder;
+
+import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.Work;
+import com.googlecode.objectify.annotation.Subclass;
+
+@Subclass
 public class CigaretteManager extends PhotoManager {
 
 	protected static final CigaretteManager instance = new CigaretteManager();
+	private static final Logger log = Logger.getLogger(CigaretteManager.class.getName());
+	
 	/**
 	 * 
 	 * MethodType: get
 	 */
-	public static CigaretteManager getInstance() {
+	
+	public static final CigaretteManager getInstance() {
 		return instance;
 	}
-
 	
 }

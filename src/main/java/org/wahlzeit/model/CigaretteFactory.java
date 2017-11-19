@@ -28,6 +28,9 @@ import java.util.logging.Logger;
 
 import org.wahlzeit.services.LogBuilder;
 
+import com.googlecode.objectify.annotation.Subclass;
+
+@Subclass
 public class CigaretteFactory extends PhotoFactory {
 	
 	private static final Logger log = Logger.getLogger(PhotoFactory.class.getName());
@@ -58,15 +61,18 @@ public class CigaretteFactory extends PhotoFactory {
 	/**
 	 * MethodType: factory
 	 */
-	public CigarettePhoto createPhoto() {
+	@Override
+	public Photo createPhoto() {
 		return new CigarettePhoto();
 	}
 	
 	/**
 	 * MethodType: factory
 	 */
-	public CigarettePhoto createPhoto(PhotoId id) {
+	@Override
+	public Photo createPhoto(PhotoId id) {
 		return new CigarettePhoto(id);
 	}
+	
 
 }
