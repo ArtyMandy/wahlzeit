@@ -31,7 +31,8 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
-import org.junit.Test; 
+import org.junit.Test;
+import org.wahlzeit.model.coordinate.CartesianCoordinate; 
 
 
 /**
@@ -48,11 +49,11 @@ public class LocationTest {
 	
 	@Before
 	public void setUp() {
-		l1 = new Location(new Coordinate(1,1,1));
-		l2 = new Location(new Coordinate(1,1,2));
-		l3 = new Location(new Coordinate(1,3,1));
-		l4 = new Location(new Coordinate(4,1,1));
-		l5 = new Location(new Coordinate(1,1,1));
+		l1 = new Location(new CartesianCoordinate(1,1,1));
+		l2 = new Location(new CartesianCoordinate(1,1,2));
+		l3 = new Location(new CartesianCoordinate(1,3,1));
+		l4 = new Location(new CartesianCoordinate(4,1,1));
+		l5 = new Location(new CartesianCoordinate(1,1,1));
 	}
 	
 	@Test

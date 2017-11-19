@@ -26,6 +26,9 @@ package org.wahlzeit.model;
 
 import java.util.Objects;
 
+import org.wahlzeit.model.coordinate.CartesianCoordinate;
+import org.wahlzeit.model.coordinate.Coordinate;
+
 public class Location {
 	
 	private Coordinate coordinate;
@@ -47,7 +50,7 @@ public class Location {
 	/**
 	 * @methodtype set
 	 */
-	public void setCoordinate(Coordinate c) {
+	public void setCoordinate(CartesianCoordinate c) {
 		this.coordinate = c;
 	}
 	

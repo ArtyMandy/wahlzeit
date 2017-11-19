@@ -30,6 +30,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.*;
 import org.junit.rules.RuleChain;
 import org.junit.rules.TestRule;
+import org.wahlzeit.model.coordinate.CartesianCoordinate;
 import org.wahlzeit.testEnvironmentProvider.LocalDatastoreServiceTestConfigProvider;
 
 public class CigaretteFactoryTest {
@@ -37,31 +38,34 @@ public class CigaretteFactoryTest {
 	@ClassRule
 	public static TestRule chain = RuleChain.outerRule(new LocalDatastoreServiceTestConfigProvider());
 	
-	private CigaretteFactory fact;
-	private CigarettePhoto firstPhoto;
+	private Photo firstPhoto;
 	
 	@Before
 	public void setUp() {
-		fact = CigaretteFactory.getInstance();
-		firstPhoto = fact.createPhoto();
+		firstPhoto = CigaretteFactory.getInstance().createPhoto();
 	}
 	
 	@Test
 	public void createFactory() {
-		assertTrue(fact instanceof CigaretteFactory);
-		assertEquals(fact.getClass(), CigaretteFactory.class);
+		assertTrue(CigaretteFactory.getInstance() instanceof CigaretteFactory);
+		assertEquals(CigaretteFactory.getInstance().getClass(), CigaretteFactory.class);
 	}
 	
 	@Test(expected = IllegalStateException.class)
 	public void initializeShouldThrowException() {
-		CigaretteFactory.setInstance(fact);
+		CigaretteFactory.setInstance(new CigaretteFactory());
 	}
 	
 	@Test
 	public void checkPhotoWithLocation() {
-		firstPhoto.setLocation(new Location(new Coordinate(1,1,1)));
-		Coordinate co = new Coordinate(1,1,1);
-		assertEquals(co,firstPhoto.getLocation());
+		firstPhoto.setLocation(new Location(new CartesianCoordinate(1,1,1)));
+		CartesianCoordinate co = new CartesianCoordinate(1,1,1);
+		assertEquals(co,firstPhoto.getLocation().getCoordinate());
+	}
+	
+	@Test
+	public void firstPhotoIsValidCigarettePhoto() {
+		assertTrue(firstPhoto instanceof CigarettePhoto);
 	}
 
 }

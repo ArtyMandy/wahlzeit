@@ -22,8 +22,12 @@
  * License along with this program. If not, see
  * <http://www.gnu.org/licenses/>.
  */
+
+package org.wahlzeit;
+
 import org.junit.runner.*;
 import org.junit.runners.*;
+
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({

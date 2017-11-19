@@ -32,6 +32,7 @@ import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.RuleChain;
 import org.junit.rules.TestRule;
+import org.wahlzeit.model.coordinate.CartesianCoordinate;
 import org.wahlzeit.testEnvironmentProvider.LocalDatastoreServiceTestConfigProvider;
 
 public class CigarettePhotoTest {
@@ -45,7 +46,7 @@ public class CigarettePhotoTest {
 	@Before
 	public void setUp() {
 		p1 = new CigarettePhoto();
-		p1.setLocation(new Location(new Coordinate(1,1,1)));
+		p1.setLocation(new Location(new CartesianCoordinate(1,1,1)));
 		p1.setBrand("L&M");
 		p1.setManufacturer("Philip Morris GmbH");
 		
@@ -54,7 +55,7 @@ public class CigarettePhotoTest {
 	public void createdPhotoShouldMatchCigarettePhoto() {
 		assertTrue(p1 instanceof CigarettePhoto);
 		assertEquals(p1.getClass(), CigarettePhoto.class);
-		assertTrue(p1.location.equals(new Location(new Coordinate(1,1,1))));
+		assertTrue(p1.location.equals(new Location(new CartesianCoordinate(1,1,1))));
 		assertTrue(p1.getBrand().equals("L&M"));
 	}
 	

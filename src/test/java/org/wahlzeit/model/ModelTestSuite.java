@@ -31,7 +31,7 @@ import org.junit.runners.*;
 @Suite.SuiteClasses({
 	
 	org.wahlzeit.model.AccessRightsTest.class,
-	org.wahlzeit.model.CoordinateTest.class,
+	org.wahlzeit.model.coordinate.CartesianCoordinateTest.class,
 	org.wahlzeit.model.FlagReasonTest.class,
 	org.wahlzeit.model.GenderTest.class,
 	org.wahlzeit.model.GuestTest.class,
@@ -43,7 +43,8 @@ import org.junit.runners.*;
 	org.wahlzeit.model.CigaretteManagerTest.class,
 	org.wahlzeit.model.CigaretteFactoryTest.class,
 	org.wahlzeit.model.CigarettePhotoTest.class,
-	org.wahlzeit.model.persistence.PersistenceTestSuite.class
+	org.wahlzeit.model.persistence.PersistenceTestSuite.class,
+	org.wahlzeit.model.coordinate.CoordinateTestSuite.class
 	
 })
 
