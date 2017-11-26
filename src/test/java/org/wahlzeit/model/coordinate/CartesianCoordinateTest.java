@@ -48,6 +48,9 @@ public class CartesianCoordinateTest {
 	private Coordinate coo6;
 	private Coordinate coo7;
 	private Coordinate coo8;
+	private Coordinate coo9;
+	private Coordinate coo10;
+	private Coordinate coo11;
 	
 	@Before 
 	public void setUp() {
@@ -61,6 +64,9 @@ public class CartesianCoordinateTest {
 		//London Latitude: 51.508530 Longtitude: -0.076132
 		coo7 = new CartesianCoordinate(-5.268904832, -6.625945753, 6370.994376);
 		coo8 = new SphericCoordinate(51.508530, -0.076132);
+		coo9 = new CartesianCoordinate(10,10,10);
+		coo10 = new CartesianCoordinate(10,10,10);
+		coo11 = new CartesianCoordinate(20,20,20);
 		
 	}
 	
@@ -95,12 +101,14 @@ public class CartesianCoordinateTest {
 	public void coordsShouldMatch(){
 		assertTrue(coo4.equals(coo3));
 		assertTrue(coo1.equals(coo1));
+		assertTrue(coo9.equals(coo10));
 	}
 	
 	@Test
 	public void coordsShouldNotMatch() {
 		assertFalse(coo3.equals(coo2));
 		assertFalse(coo5.equals(coo2));
+		assertFalse(coo10.equals(coo11));
 	}
 	
 

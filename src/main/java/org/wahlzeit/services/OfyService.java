@@ -13,6 +13,7 @@ import org.wahlzeit.model.Photo;
 import org.wahlzeit.model.PhotoCase;
 import org.wahlzeit.model.Tag;
 import org.wahlzeit.model.User;
+import org.wahlzeit.model.coordinate.*;
 import org.wahlzeit.model.persistence.DatastoreAdapter.ImageWrapper;
 
 /**
@@ -28,6 +29,8 @@ public class OfyService {
 	static {
 		factory().register(Photo.class);
 		factory().register(CigarettePhoto.class);
+		factory().register(CartesianCoordinate.class);
+		factory().register(SphericCoordinate.class);
 		factory().register(Globals.class);
 		factory().register(Tag.class);
 		factory().register(User.class);

@@ -1,6 +1,6 @@
 /*Author: Artur Mandybura, https://github.com/ArtyMandy/wahlzeit
  *
- *Class: Coordinate
+ *Class: CartesianCoordinate
  *
  *Version information: adap-cw03  
  *
@@ -26,9 +26,11 @@ package org.wahlzeit.model.coordinate;
 
 import java.util.Objects;
 
-public class CartesianCoordinate implements Coordinate {
+import com.googlecode.objectify.annotation.Subclass;
+
+@Subclass
+public class CartesianCoordinate extends AbstractCoordinate{
 	
-	private static final double DELTA = 0.0000001; 
 	private double x;
 	private double y;
 	private double z;
@@ -104,11 +106,6 @@ public class CartesianCoordinate implements Coordinate {
 	}
 	
 	@Override
-	public double getCartesianDistance(Coordinate coordinate) {
-		return this.getDistance(coordinate);
-	}
-	
-	@Override
 	public SphericCoordinate asSphericCoordinate() {
 		double longitude;
 		double latitude;
@@ -131,23 +128,13 @@ public class CartesianCoordinate implements Coordinate {
 	}
 	
 	@Override
-	public double getDistance(Coordinate coordinate) {
-		CartesianCoordinate inputCoordinate = coordinate.asCartesianCoordinate();
-		double distance;	
-		
-		distance = Math.pow((inputCoordinate.x - x), 2) + Math.pow((inputCoordinate.y - y), 2) + Math.pow((inputCoordinate.z - z), 2);
-		
-		return Math.sqrt(distance);	
-	}
-	
-	@Override
 	public boolean isEqual(Coordinate coordinate) {
 		CartesianCoordinate inputCoordinate = coordinate.asCartesianCoordinate();
 		
-		if(inputCoordinate != null
-				&& Math.abs(inputCoordinate.x - this.x) <= DELTA 
-				&& Math.abs(inputCoordinate.y - this.y) <= DELTA
-				&& Math.abs(inputCoordinate.z - this.z) <= DELTA) {
+		if(inputCoordinate != null && 
+				isDoubleEqual(inputCoordinate.x, this.x) &&
+				isDoubleEqual(inputCoordinate.y, this.y) &&
+				isDoubleEqual(inputCoordinate.z, this.z)) {
 			return true;		
 		}
 		

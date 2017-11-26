@@ -31,7 +31,6 @@ import org.junit.runners.*;
 @Suite.SuiteClasses({
 	
 	org.wahlzeit.model.AccessRightsTest.class,
-	org.wahlzeit.model.coordinate.CartesianCoordinateTest.class,
 	org.wahlzeit.model.FlagReasonTest.class,
 	org.wahlzeit.model.GenderTest.class,
 	org.wahlzeit.model.GuestTest.class,

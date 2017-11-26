@@ -26,9 +26,11 @@ package org.wahlzeit.model.coordinate;
 
 import java.util.Objects;
 
-public class SphericCoordinate implements Coordinate {
+import com.googlecode.objectify.annotation.Subclass;
 
-	private static final double DELTA = 0.0000001; 
+@Subclass
+public class SphericCoordinate extends AbstractCoordinate {
+
 	private double latitude;
 	private double longitude;
 	// Earthradius default value
@@ -103,33 +105,13 @@ public class SphericCoordinate implements Coordinate {
 	}
 
 	@Override
-	public double getSphericDistance(Coordinate coordinate) {
-		return this.getDistance(coordinate);
-	}
-
-	@Override
-	public double getDistance(Coordinate coordinate) {
-		SphericCoordinate inputCoordinate = coordinate.asSphericCoordinate();
-		double diffLatitude = Math.toRadians(this.latitude) - Math.toRadians(inputCoordinate.latitude);
-		double diffLongitude = Math.toRadians(this.longitude) - Math.toRadians(inputCoordinate.longitude);
-		
-		double sum = Math.sin(diffLatitude / 2) * Math.sin(diffLatitude / 2) +
-							Math.cos(Math.toRadians(this.latitude) ) * Math.cos(Math.toRadians(inputCoordinate.latitude) ) * 
-							(Math.sin(diffLongitude / 2) * Math.sin(diffLongitude /2));
-		
-		double distance = 2 * Math.asin(Math.sqrt(sum)) * radius ;
-		
-		return distance;
-	}
-
-	@Override
 	public boolean isEqual(Coordinate coordinate) {
 		SphericCoordinate input = coordinate.asSphericCoordinate();
 		
-		if(input != null
-				&& Math.abs(input.latitude - this.latitude) <= DELTA 
-				&& Math.abs(input.longitude - this.longitude) <= DELTA
-				&& Math.abs(input.radius - this.radius) <= DELTA) {
+		if(input != null 
+				&& isDoubleEqual(input.latitude, this.latitude) 
+				&& isDoubleEqual(input.longitude, this.longitude) 
+				&& isDoubleEqual(input.radius, this.radius)) {
 			return true;		
 		}
 		return false;

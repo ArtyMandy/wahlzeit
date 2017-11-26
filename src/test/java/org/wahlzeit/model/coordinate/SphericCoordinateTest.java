@@ -25,6 +25,7 @@
 package org.wahlzeit.model.coordinate;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -38,6 +39,9 @@ public class SphericCoordinateTest {
 	Coordinate coo2;
 	Coordinate coo3;
 	Coordinate coo4;
+	Coordinate coo5;
+	Coordinate coo6;
+	Coordinate coo7;
 	
 	@Before
 	public void setUp() {
@@ -52,6 +56,11 @@ public class SphericCoordinateTest {
 		coo3 = new SphericCoordinate(52.520008, 13.404954);
 		//Berlin Cartesian Coordinate
 		coo4 = new CartesianCoordinate(898.7324481, 1172.098186, 6197.427436);
+		
+		coo5 = new SphericCoordinate(10.0, 10.0);
+		coo6 = new SphericCoordinate(10.0, 10.0);
+		coo7 = new SphericCoordinate(20.0, 10.0);
+		
 		
 	}
 	
@@ -75,6 +84,12 @@ public class SphericCoordinateTest {
 		assertEquals(151.9448210895663, coo1.asSphericCoordinate().getSphericDistance(coo2), DELTA);
 		assertEquals(377.56829689841425, coo1.asSphericCoordinate().getSphericDistance(coo3), DELTA);
 		assertEquals(504.300829009964, coo2.asSphericCoordinate().getSphericDistance(coo3), DELTA);
+	}
+
+	@Test
+	public void equalsFunctionCheck() {
+		assertTrue(coo5.equals(coo6));
+		assertFalse(coo6.equals(coo7));
 	}
 
 }

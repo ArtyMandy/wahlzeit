@@ -50,7 +50,7 @@ public class Location {
 	/**
 	 * @methodtype set
 	 */
-	public void setCoordinate(CartesianCoordinate c) {
+	public void setCoordinate(Coordinate c) {
 		this.coordinate = c;
 	}
 	
