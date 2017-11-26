@@ -123,11 +123,6 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	}
 	
 	@Override
-	public double getSphericDistance(Coordinate coordinate) {
-		return this.asSphericCoordinate().getDistance(coordinate);
-	}
-	
-	@Override
 	public boolean isEqual(Coordinate coordinate) {
 		CartesianCoordinate inputCoordinate = coordinate.asCartesianCoordinate();
 		

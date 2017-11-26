@@ -95,11 +95,6 @@ public class SphericCoordinate extends AbstractCoordinate {
 	}
 
 	@Override
-	public double getCartesianDistance(Coordinate coordinate) {
-		return this.asCartesianCoordinate().getDistance(coordinate);
-	}
-
-	@Override
 	public SphericCoordinate asSphericCoordinate() {
 		return this;
 	}
