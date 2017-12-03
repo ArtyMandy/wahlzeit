@@ -42,6 +42,9 @@ public abstract class AbstractCoordinate implements Coordinate{
 					+ Math.pow((inputCoordinate.getY() - actual.getY()), 2)
 					+ Math.pow((inputCoordinate.getZ() - actual.getZ()), 2);
 		
+		assertIsValidDouble(distance);
+		assert distance >= 0.0;
+		
 		return Math.sqrt(distance);	
 	}
 
@@ -62,6 +65,9 @@ public abstract class AbstractCoordinate implements Coordinate{
 		
 		double distance = 2 * Math.asin(Math.sqrt(sum)) * actual.getRadius() ;
 		
+		assertIsValidDouble(distance);
+		assert distance >= 0.0;
+		
 		return distance;
 	}
 	
@@ -78,14 +84,20 @@ public abstract class AbstractCoordinate implements Coordinate{
 	@Override
 	public abstract boolean isEqual(Coordinate coordinate);
 
+	protected abstract void assertClassInvariants();
 	
-	protected boolean isDoubleEqual(double a, double b) {
-		return Math.abs(a - b) <= DELTA;
+	protected void assertIsValidDouble(double value) {
+		assert Double.NaN != value 
+				&& Double.NEGATIVE_INFINITY != value 
+				&& Double.POSITIVE_INFINITY != value;
 	}
 	
 	protected void assertIsNotNull(Coordinate coordinate) {
-		if(coordinate == null) {
-			throw new IllegalArgumentException("Coordinate is null");
-		}
+		assert coordinate != null;
+	}
+	
+	
+	protected boolean isDoubleEqual(double a, double b) {
+		return Math.abs(a - b) <= DELTA;
 	}
 }

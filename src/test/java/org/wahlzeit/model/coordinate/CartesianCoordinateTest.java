@@ -52,6 +52,11 @@ public class CartesianCoordinateTest {
 	private Coordinate coo10;
 	private Coordinate coo11;
 	
+	private Coordinate coo12;
+	private Coordinate coo13;
+	private Coordinate coo14;
+	private Coordinate coo15;
+	
 	@Before 
 	public void setUp() {
 		coo1 = new CartesianCoordinate(0,0,0); // x: 0, y: 0, z: 0
@@ -67,7 +72,6 @@ public class CartesianCoordinateTest {
 		coo9 = new CartesianCoordinate(10,10,10);
 		coo10 = new CartesianCoordinate(10,10,10);
 		coo11 = new CartesianCoordinate(20,20,20);
-		
 	}
 	
 	/* Coordinates: coo1, coo2
@@ -126,6 +130,16 @@ public class CartesianCoordinateTest {
 		assertEquals(coo7.asCartesianCoordinate().getX(),coo8.asCartesianCoordinate().getX(), DELTA);
 		assertEquals(coo7.asCartesianCoordinate().getY(), coo8.asCartesianCoordinate().getY(), DELTA);
 		assertEquals(coo7.asCartesianCoordinate().getZ(), coo8.asCartesianCoordinate().getZ(), DELTA);
+	}
+	
+	@Test(expected = AssertionError.class)
+	public void assertWillFail() {
+		coo12 = new CartesianCoordinate(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
+		coo13 = new CartesianCoordinate(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
+		coo14 = new CartesianCoordinate(Double.NaN, Double.NaN, Double.NaN);
+		coo1.setX(Double.NaN);
+		coo1.setY(Double.POSITIVE_INFINITY);
+		coo1.setZ(Double.NEGATIVE_INFINITY);
 	}
 	
 	

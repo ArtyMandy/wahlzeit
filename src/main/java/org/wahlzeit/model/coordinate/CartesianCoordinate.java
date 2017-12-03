@@ -37,9 +37,13 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	
 	
 	public CartesianCoordinate(double x, double y, double z) {
+		assertIsValidDouble(x);
+		assertIsValidDouble(y);
+		assertIsValidDouble(z);
 		this.x = x;
 		this.y = y;
 		this.z = z;
+		assertClassInvariants();
 	}
 	
 	/**
@@ -67,6 +71,7 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	 * @methodtype set
 	 */
 	public double setX(double x) {
+		assertIsValidDouble(x);
 		return this.x = x;
 	}
 	
@@ -74,6 +79,7 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	 * @methodtype set
 	 */
 	public double setY(double y) {
+		assertIsValidDouble(y);
 		return this.y = y;
 	}
 	
@@ -81,6 +87,7 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	 * @methodtype set
 	 */
 	public double setZ(double z) {
+		assertIsValidDouble(z);
 		return this.z = z;
 	}
 	
@@ -91,9 +98,7 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	
 	@Override
 	public boolean equals(Object inputCoordinate) {
-		if(!(inputCoordinate instanceof CartesianCoordinate)) {
-			return false;
-		}
+		assert inputCoordinate instanceof CartesianCoordinate;
 		
 		CartesianCoordinate coord = (CartesianCoordinate)inputCoordinate;
 		
@@ -101,7 +106,22 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	}
 	
 	@Override
+	public boolean isEqual(Coordinate coordinate) {
+		assertClassInvariants();
+		CartesianCoordinate inputCoordinate = coordinate.asCartesianCoordinate();
+		
+		if(isDoubleEqual(inputCoordinate.x, this.x) &&
+				isDoubleEqual(inputCoordinate.y, this.y) &&
+				isDoubleEqual(inputCoordinate.z, this.z)) {
+			return true;		
+		}
+		
+		return false;
+	}
+	
+	@Override
 	public CartesianCoordinate asCartesianCoordinate() {
+		assertClassInvariants();
 		return this;
 	}
 	
@@ -121,18 +141,12 @@ public class CartesianCoordinate extends AbstractCoordinate{
 		
 		return new SphericCoordinate(latitude, longitude, radius);
 	}
-	
+
 	@Override
-	public boolean isEqual(Coordinate coordinate) {
-		CartesianCoordinate inputCoordinate = coordinate.asCartesianCoordinate();
-		
-		if(inputCoordinate != null && 
-				isDoubleEqual(inputCoordinate.x, this.x) &&
-				isDoubleEqual(inputCoordinate.y, this.y) &&
-				isDoubleEqual(inputCoordinate.z, this.z)) {
-			return true;		
-		}
-		
-		return false;
+	protected void assertClassInvariants() {
+		assertIsNotNull(this);
+		assertIsValidDouble(this.getX());
+		assertIsValidDouble(this.getY());
+		assertIsValidDouble(this.getZ());
 	}
 }

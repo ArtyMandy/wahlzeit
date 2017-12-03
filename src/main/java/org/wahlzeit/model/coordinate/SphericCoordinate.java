@@ -42,8 +42,13 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 * @param longitude
 	 */
 	public SphericCoordinate(double latitude, double longitude) {
+		assertIsValidDouble(latitude);
+		assertIsValidDouble(longitude);
+		
 		this.latitude = latitude;
 		this.longitude = longitude;
+		
+		assertClassInvariants();
 	}
 	
 	/**
@@ -53,9 +58,15 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 * @param radius
 	 */
 	public SphericCoordinate(double latitude, double longitude, double radius) {
+		assertIsValidDouble(latitude);
+		assertIsValidDouble(longitude);
+		assertIsValidDouble(radius);
+		
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.radius = radius;
+		
+		assertClassInvariants();
 	}
 
 
@@ -80,6 +91,57 @@ public class SphericCoordinate extends AbstractCoordinate {
 		return this.radius;
 	}
 	
+	/**
+	 * @methodtype set
+	 */
+	public double setLat(double latitude) {
+		assertIsValidDouble(latitude);
+		return this.latitude = latitude;
+	}
+	
+	/**
+	 * @methodtype set
+	 */
+	public double setLong(double longitude) {
+		assertIsValidDouble(longitude);
+		return this.longitude = longitude;
+	}
+	
+	/**
+	 * @methodtype set
+	 */
+	public double setRadius(double radius) {
+		assertIsValidDouble(radius);
+		return this.radius = radius;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(latitude, longitude, radius);
+	}
+	
+	@Override
+	public boolean equals(Object inputCoordinate) {
+		assert inputCoordinate instanceof SphericCoordinate;
+		
+		SphericCoordinate coord = (SphericCoordinate)inputCoordinate;
+		
+		return this.isEqual(coord);
+	}
+	
+	@Override
+	public boolean isEqual(Coordinate coordinate) {
+		assertClassInvariants();
+		
+		SphericCoordinate input = coordinate.asSphericCoordinate();
+		
+		if(isDoubleEqual(input.latitude, this.latitude) &&
+				isDoubleEqual(input.longitude, this.longitude) &&
+				isDoubleEqual(input.radius, this.radius)) {
+			return true;		
+		}
+		return false;
+	}
 	
 	@Override
 	public CartesianCoordinate asCartesianCoordinate() {
@@ -96,37 +158,15 @@ public class SphericCoordinate extends AbstractCoordinate {
 
 	@Override
 	public SphericCoordinate asSphericCoordinate() {
+		assertClassInvariants();
 		return this;
 	}
 
 	@Override
-	public boolean isEqual(Coordinate coordinate) {
-		SphericCoordinate input = coordinate.asSphericCoordinate();
-		
-		if(input != null 
-				&& isDoubleEqual(input.latitude, this.latitude) 
-				&& isDoubleEqual(input.longitude, this.longitude) 
-				&& isDoubleEqual(input.radius, this.radius)) {
-			return true;		
-		}
-		return false;
+	protected void assertClassInvariants() {
+		assertIsNotNull(this);
+		assertIsValidDouble(this.getLat());
+		assertIsValidDouble(this.getLong());
+		assertIsValidDouble(this.getRadius());
 	}
-	
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(latitude, longitude, radius);
-	}
-	
-	@Override
-	public boolean equals(Object inputCoordinate) {
-		if(!(inputCoordinate instanceof SphericCoordinate)) {
-			return false;
-		}
-		
-		SphericCoordinate coord = (SphericCoordinate)inputCoordinate;
-		
-		return this.isEqual(coord);
-	}
-
 }

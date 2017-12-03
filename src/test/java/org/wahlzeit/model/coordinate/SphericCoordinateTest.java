@@ -35,13 +35,17 @@ public class SphericCoordinateTest {
 
 	public static final double DELTA = 0.00001;
 
-	Coordinate coo1;
+	SphericCoordinate coo1;
 	Coordinate coo2;
 	Coordinate coo3;
 	Coordinate coo4;
 	Coordinate coo5;
 	Coordinate coo6;
 	Coordinate coo7;
+	
+	Coordinate coo8;
+	Coordinate coo9;
+	Coordinate coo10;
 	
 	@Before
 	public void setUp() {
@@ -60,7 +64,6 @@ public class SphericCoordinateTest {
 		coo5 = new SphericCoordinate(10.0, 10.0);
 		coo6 = new SphericCoordinate(10.0, 10.0);
 		coo7 = new SphericCoordinate(20.0, 10.0);
-		
 		
 	}
 	
@@ -90,6 +93,16 @@ public class SphericCoordinateTest {
 	public void equalsFunctionCheck() {
 		assertTrue(coo5.equals(coo6));
 		assertFalse(coo6.equals(coo7));
+	}
+	
+	@Test(expected = AssertionError.class)
+	public void assertWillFail() {
+		coo8 = new SphericCoordinate(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
+		coo9 = new SphericCoordinate(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
+		coo10 = new SphericCoordinate(Double.NaN, Double.NaN, Double.NaN);
+		coo1.setLat(Double.NaN);
+		coo1.setLong(Double.POSITIVE_INFINITY);
+		coo1.setRadius(Double.NEGATIVE_INFINITY);	
 	}
 
 }
