@@ -95,7 +95,7 @@ public class SphericCoordinateTest {
 		assertFalse(coo6.equals(coo7));
 	}
 	
-	@Test(expected = AssertionError.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void assertWillFail() {
 		coo8 = new SphericCoordinate(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
 		coo9 = new SphericCoordinate(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);

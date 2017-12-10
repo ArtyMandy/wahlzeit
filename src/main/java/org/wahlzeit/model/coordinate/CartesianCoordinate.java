@@ -127,6 +127,7 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	
 	@Override
 	public SphericCoordinate asSphericCoordinate() {
+		assertClassInvariants();
 		double longitude;
 		double latitude;
 		double radius;

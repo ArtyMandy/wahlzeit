@@ -145,6 +145,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 	
 	@Override
 	public CartesianCoordinate asCartesianCoordinate() {
+		assertClassInvariants();
 		double radiansLat = Math.toRadians(latitude);
 		double radiansLong = Math.toRadians(longitude);
 		double x = radius * Math.cos(radiansLat) * Math.sin(radiansLong);
@@ -152,7 +153,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 		double z = radius * Math.cos(radiansLong);
 		
 		CartesianCoordinate coordinate = new CartesianCoordinate(x, y, z);
-		
+		assertClassInvariants();
 		return coordinate;
 	}
 

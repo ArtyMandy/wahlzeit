@@ -35,7 +35,7 @@ public class Location {
 
 	public Location(Coordinate coordinate) {
 		if(coordinate == null) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("coordinate is null");
 		}
 		this.coordinate = coordinate;
 	}

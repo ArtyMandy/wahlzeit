@@ -132,7 +132,7 @@ public class CartesianCoordinateTest {
 		assertEquals(coo7.asCartesianCoordinate().getZ(), coo8.asCartesianCoordinate().getZ(), DELTA);
 	}
 	
-	@Test(expected = AssertionError.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void assertWillFail() {
 		coo12 = new CartesianCoordinate(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
 		coo13 = new CartesianCoordinate(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);

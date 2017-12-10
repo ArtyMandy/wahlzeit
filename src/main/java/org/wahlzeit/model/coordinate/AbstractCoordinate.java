@@ -24,6 +24,7 @@
  */
 package org.wahlzeit.model.coordinate;
 
+
 public abstract class AbstractCoordinate implements Coordinate{
 
 	public static final double DELTA = 0.0000001;  
@@ -43,7 +44,7 @@ public abstract class AbstractCoordinate implements Coordinate{
 					+ Math.pow((inputCoordinate.getZ() - actual.getZ()), 2);
 		
 		assertIsValidDouble(distance);
-		assert distance >= 0.0;
+		assertIsValidDistance(distance);
 		
 		return Math.sqrt(distance);	
 	}
@@ -66,7 +67,7 @@ public abstract class AbstractCoordinate implements Coordinate{
 		double distance = 2 * Math.asin(Math.sqrt(sum)) * actual.getRadius() ;
 		
 		assertIsValidDouble(distance);
-		assert distance >= 0.0;
+		assertIsValidDistance(distance);
 		
 		return distance;
 	}
@@ -87,17 +88,27 @@ public abstract class AbstractCoordinate implements Coordinate{
 	protected abstract void assertClassInvariants();
 	
 	protected void assertIsValidDouble(double value) {
-		assert Double.NaN != value 
-				&& Double.NEGATIVE_INFINITY != value 
-				&& Double.POSITIVE_INFINITY != value;
+		if(Double.NaN == value 
+				|| Double.NEGATIVE_INFINITY == value 
+				|| Double.POSITIVE_INFINITY == value) {
+			throw new IllegalArgumentException("argument is not valid it is NaN, NegativeInfinit or PositiveInfinit");
+		}
 	}
 	
 	protected void assertIsNotNull(Coordinate coordinate) {
-		assert coordinate != null;
+		if(coordinate == null) {
+			throw new IllegalArgumentException("argument is null");
+		}
 	}
 	
 	
 	protected boolean isDoubleEqual(double a, double b) {
 		return Math.abs(a - b) <= DELTA;
+	}
+	
+	protected void assertIsValidDistance(double distance) {
+		if(distance < 0.0) {
+			throw new IllegalArgumentException("argument have to be bigger or equal 0.0");
+		}
 	}
 }
