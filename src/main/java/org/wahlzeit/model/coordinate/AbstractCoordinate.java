@@ -39,6 +39,7 @@ public abstract class AbstractCoordinate implements Coordinate{
 		
 		distance = doGetCartesianDistance(coordinate);
 		
+		assertIsValidDouble(distance);
 		assertIsValidDistance(distance);
 		
 		return distance;	
@@ -52,9 +53,6 @@ public abstract class AbstractCoordinate implements Coordinate{
 		distance = Math.pow((inputCoordinate.getX() - actual.getX()), 2) 
 					+ Math.pow((inputCoordinate.getY() - actual.getY()), 2)
 					+ Math.pow((inputCoordinate.getZ() - actual.getZ()), 2);
-		
-		assertIsValidDouble(distance);
-		assertIsValidDistance(distance);
 		
 		return Math.sqrt(distance);	
 	}
@@ -109,7 +107,7 @@ public abstract class AbstractCoordinate implements Coordinate{
 
 	protected abstract void assertClassInvariants();
 	
-	protected void assertIsValidDouble(double value) {
+	protected void assertIsValidDouble(double value) throws IllegalArgumentException {
 		if(Double.NaN == value 
 				|| Double.NEGATIVE_INFINITY == value 
 				|| Double.POSITIVE_INFINITY == value) {
@@ -117,7 +115,7 @@ public abstract class AbstractCoordinate implements Coordinate{
 		}
 	}
 	
-	protected void assertIsNotNull(Coordinate coordinate) {
+	protected void assertIsNotNull(Coordinate coordinate) throws IllegalArgumentException {
 		if(coordinate == null) {
 			throw new IllegalArgumentException("argument is null");
 		}
@@ -128,7 +126,7 @@ public abstract class AbstractCoordinate implements Coordinate{
 		return Math.abs(a - b) <= DELTA;
 	}
 	
-	protected void assertIsValidDistance(double distance) {
+	protected void assertIsValidDistance(double distance) throws IllegalArgumentException {
 		if(distance < 0.0) {
 			throw new IllegalArgumentException("argument have to be bigger or equal 0.0");
 		}
