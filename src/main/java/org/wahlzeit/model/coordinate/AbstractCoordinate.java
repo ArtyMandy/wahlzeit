@@ -35,6 +35,16 @@ public abstract class AbstractCoordinate implements Coordinate{
 	@Override
 	public double getCartesianDistance(Coordinate coordinate) {
 		assertIsNotNull(coordinate);
+		double distance;
+		
+		distance = doGetCartesianDistance(coordinate);
+		
+		assertIsValidDistance(distance);
+		
+		return distance;	
+	}
+
+	protected double doGetCartesianDistance(Coordinate coordinate) {
 		CartesianCoordinate actual = this.asCartesianCoordinate();
 		CartesianCoordinate inputCoordinate = coordinate.asCartesianCoordinate();
 		double distance;	
@@ -48,13 +58,24 @@ public abstract class AbstractCoordinate implements Coordinate{
 		
 		return Math.sqrt(distance);	
 	}
-
+	
 	@Override
 	public abstract SphericCoordinate asSphericCoordinate();
 
 	@Override
 	public double getSphericDistance(Coordinate coordinate) {
 		assertIsNotNull(coordinate);
+		double distance;
+		
+		distance = doGetSphericDistance(coordinate);
+		
+		assertIsValidDouble(distance);
+		assertIsValidDistance(distance);
+		
+		return distance;
+	}
+	
+	protected double doGetSphericDistance(Coordinate coordinate) {
 		SphericCoordinate actual = this.asSphericCoordinate();
 		SphericCoordinate inputCoordinate = coordinate.asSphericCoordinate();
 		double diffLatitude = Math.toRadians(actual.getLat()) - Math.toRadians(inputCoordinate.getLat());
@@ -66,9 +87,6 @@ public abstract class AbstractCoordinate implements Coordinate{
 		
 		double distance = 2 * Math.asin(Math.sqrt(sum)) * actual.getRadius() ;
 		
-		assertIsValidDouble(distance);
-		assertIsValidDistance(distance);
-		
 		return distance;
 	}
 	
@@ -78,8 +96,12 @@ public abstract class AbstractCoordinate implements Coordinate{
 	@Override
 	public double getDistance(Coordinate coordinate) {
 		assertIsNotNull(coordinate);
-		return getCartesianDistance(coordinate);
+		double distance;
 		
+		distance = doGetCartesianDistance(coordinate);
+		assertIsValidDistance(distance);
+		
+		return distance;
 	}
 
 	@Override
