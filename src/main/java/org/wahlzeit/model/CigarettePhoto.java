@@ -25,7 +25,7 @@
 package org.wahlzeit.model;
 
 
-import com.googlecode.objectify.annotation.Entity;
+import org.wahlzeit.utils.Assertion;
 import com.googlecode.objectify.annotation.Subclass;
 
 
@@ -52,11 +52,13 @@ public class CigarettePhoto extends Photo {
 	/**
 	 * @MethodType constructor
 	 */
-//	public CigarettePhoto(PhotoId myId, String brand, String manufacturer) {
-//		this.brand = brand;
-//		this.
-//		super(myId)
-//	}
+	public CigarettePhoto(PhotoId myId, String brand, String manufacturer) {
+		super(myId);
+		Assertion.assertIsNotNull(brand);
+		Assertion.assertIsNotNull(manufacturer);
+		this.brand = brand;
+		this.manufacturer = manufacturer;
+	}
 	
 	/**
 	 * @MethodType get
@@ -76,17 +78,16 @@ public class CigarettePhoto extends Photo {
 	 * @MethodType set
 	 */
 	public void setBrand(String brand) {
-		if(brand != null) {
-			this.brand = brand;
-		}
+		Assertion.assertIsNotNull(brand);
+		this.brand = brand;
+		
 	}
 	/**
 	 * @MethodType set
 	 */
 	public void setManufacturer(String manufacturer) {
-		if(manufacturer != null) {
+		Assertion.assertIsNotNull(manufacturer);
 			this.manufacturer = manufacturer;
-		}
 	}
 	
 

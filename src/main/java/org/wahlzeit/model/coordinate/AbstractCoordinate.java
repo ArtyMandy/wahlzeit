@@ -24,23 +24,25 @@
  */
 package org.wahlzeit.model.coordinate;
 
+import org.wahlzeit.utils.Assertion;
 
 public abstract class AbstractCoordinate implements Coordinate{
 
 	public static final double DELTA = 0.0000001;  
 	
 	@Override
-	public abstract CartesianCoordinate asCartesianCoordinate();
+	public abstract CartesianCoordinate asCartesianCoordinate() throws IllegalArgumentException;
 
 	@Override
-	public double getCartesianDistance(Coordinate coordinate) {
-		assertIsNotNull(coordinate);
+	public double getCartesianDistance(Coordinate coordinate) throws IllegalArgumentException, IllegalStateException {
+		Assertion.assertIsNotNull(coordinate);
+		assertClassInvariants();
 		double distance;
 		
 		distance = doGetCartesianDistance(coordinate);
 		
-		assertIsValidDouble(distance);
-		assertIsValidDistance(distance);
+		Assertion.assertIsValidDouble(distance);
+		Assertion.assertIsValidDistance(distance);
 		
 		return distance;	
 	}
@@ -58,17 +60,18 @@ public abstract class AbstractCoordinate implements Coordinate{
 	}
 	
 	@Override
-	public abstract SphericCoordinate asSphericCoordinate();
+	public abstract SphericCoordinate asSphericCoordinate() throws IllegalArgumentException;
 
 	@Override
-	public double getSphericDistance(Coordinate coordinate) {
-		assertIsNotNull(coordinate);
+	public double getSphericDistance(Coordinate coordinate) throws IllegalArgumentException, IllegalStateException {
+		assertClassInvariants();
+		Assertion.assertIsNotNull(coordinate);
 		double distance;
 		
 		distance = doGetSphericDistance(coordinate);
 		
-		assertIsValidDouble(distance);
-		assertIsValidDistance(distance);
+		Assertion.assertIsValidDouble(distance);
+		Assertion.assertIsValidDistance(distance);
 		
 		return distance;
 	}
@@ -92,12 +95,10 @@ public abstract class AbstractCoordinate implements Coordinate{
 	 * Calculate always the CartesianDistance for the given coordinate
 	 */
 	@Override
-	public double getDistance(Coordinate coordinate) {
-		assertIsNotNull(coordinate);
+	public double getDistance(Coordinate coordinate) throws IllegalArgumentException, IllegalStateException {
 		double distance;
 		
-		distance = doGetCartesianDistance(coordinate);
-		assertIsValidDistance(distance);
+		distance = getCartesianDistance(coordinate);
 		
 		return distance;
 	}
@@ -106,29 +107,8 @@ public abstract class AbstractCoordinate implements Coordinate{
 	public abstract boolean isEqual(Coordinate coordinate);
 
 	protected abstract void assertClassInvariants();
-	
-	protected void assertIsValidDouble(double value) throws IllegalArgumentException {
-		if(Double.NaN == value 
-				|| Double.NEGATIVE_INFINITY == value 
-				|| Double.POSITIVE_INFINITY == value) {
-			throw new IllegalArgumentException("argument is not valid it is NaN, NegativeInfinit or PositiveInfinit");
-		}
-	}
-	
-	protected void assertIsNotNull(Coordinate coordinate) throws IllegalArgumentException {
-		if(coordinate == null) {
-			throw new IllegalArgumentException("argument is null");
-		}
-	}
-	
-	
+
 	protected boolean isDoubleEqual(double a, double b) {
 		return Math.abs(a - b) <= DELTA;
-	}
-	
-	protected void assertIsValidDistance(double distance) throws IllegalArgumentException {
-		if(distance < 0.0) {
-			throw new IllegalArgumentException("argument have to be bigger or equal 0.0");
-		}
 	}
 }

@@ -21,6 +21,7 @@
 package org.wahlzeit.model;
 
 import org.wahlzeit.services.LogBuilder;
+import org.wahlzeit.utils.Assertion;
 
 import java.util.logging.Logger;
 
@@ -86,6 +87,7 @@ public  class PhotoFactory {
 	 * Creates a new photo with the specified id
 	 */
 	public Photo createPhoto(PhotoId id) {
+		Assertion.assertIsNotNull(id);
 		return new Photo(id);
 	}
 

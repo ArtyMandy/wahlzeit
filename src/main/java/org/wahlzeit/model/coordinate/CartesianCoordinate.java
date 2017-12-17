@@ -26,6 +26,8 @@ package org.wahlzeit.model.coordinate;
 
 import java.util.Objects;
 
+import org.wahlzeit.utils.Assertion;
+
 import com.googlecode.objectify.annotation.Subclass;
 
 @Subclass
@@ -37,15 +39,19 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	
 	
 	public CartesianCoordinate(double x, double y, double z) {
-		assertIsValidDouble(x);
-		assertIsValidDouble(y);
-		assertIsValidDouble(z);
+		Assertion.assertIsValidDouble(x);
+		Assertion.assertIsValidDouble(y);
+		Assertion.assertIsValidDouble(z);
 		this.x = x;
 		this.y = y;
 		this.z = z;
 		assertClassInvariants();
 	}
 	
+//	public CartesianCoordinate(CartesianCoordinate c) {
+//		this(c.x, c.y, c.z);
+//	}
+//	
 	/**
 	 * @methodtype get
 	 */
@@ -71,7 +77,7 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	 * @methodtype set
 	 */
 	public double setX(double x) {
-		assertIsValidDouble(x);
+		Assertion.assertIsValidDouble(x);
 		return this.x = x;
 	}
 	
@@ -79,7 +85,7 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	 * @methodtype set
 	 */
 	public double setY(double y) {
-		assertIsValidDouble(y);
+		Assertion.assertIsValidDouble(y);
 		return this.y = y;
 	}
 	
@@ -87,7 +93,7 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	 * @methodtype set
 	 */
 	public double setZ(double z) {
-		assertIsValidDouble(z);
+		Assertion.assertIsValidDouble(z);
 		return this.z = z;
 	}
 	
@@ -120,13 +126,13 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	}
 	
 	@Override
-	public CartesianCoordinate asCartesianCoordinate() {
+	public CartesianCoordinate asCartesianCoordinate() throws IllegalArgumentException{
 		assertClassInvariants();
 		return this;
 	}
 	
 	@Override
-	public SphericCoordinate asSphericCoordinate() {
+	public SphericCoordinate asSphericCoordinate() throws IllegalArgumentException {
 		assertClassInvariants();
 		double longitude;
 		double latitude;
@@ -145,9 +151,9 @@ public class CartesianCoordinate extends AbstractCoordinate{
 
 	@Override
 	protected void assertClassInvariants() {
-		assertIsNotNull(this);
-		assertIsValidDouble(this.getX());
-		assertIsValidDouble(this.getY());
-		assertIsValidDouble(this.getZ());
+		Assertion.assertIsNotNull(this);
+		Assertion.assertIsValidDouble(this.getX());
+		Assertion.assertIsValidDouble(this.getY());
+		Assertion.assertIsValidDouble(this.getZ());
 	}
 }
