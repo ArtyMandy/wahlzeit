@@ -24,6 +24,7 @@
  */
 package org.wahlzeit.model.coordinate;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 import org.wahlzeit.utils.Assertion;
@@ -33,12 +34,14 @@ import com.googlecode.objectify.annotation.Subclass;
 @Subclass
 public class CartesianCoordinate extends AbstractCoordinate{
 	
-	private double x;
-	private double y;
-	private double z;
+	private static HashMap<Integer, CartesianCoordinate> sharedCoordinates = new HashMap<>();
+	
+	private final double x;
+	private final double y;
+	private final double z;
 	
 	
-	public CartesianCoordinate(double x, double y, double z) {
+	private CartesianCoordinate(double x, double y, double z) {
 		Assertion.assertIsValidDouble(x);
 		Assertion.assertIsValidDouble(y);
 		Assertion.assertIsValidDouble(z);
@@ -48,10 +51,24 @@ public class CartesianCoordinate extends AbstractCoordinate{
 		assertClassInvariants();
 	}
 	
-//	public CartesianCoordinate(CartesianCoordinate c) {
-//		this(c.x, c.y, c.z);
-//	}
-//	
+	
+	public static CartesianCoordinate getInstance(double x, double y, double z) {
+		CartesianCoordinate result;
+		synchronized(sharedCoordinates) {
+			int hashKey = Objects.hash(x,y,z);
+			
+			if(sharedCoordinates.containsKey(hashKey)){
+				result = sharedCoordinates.get(hashKey);
+				return result;
+			}
+			else {
+				result = new CartesianCoordinate(x,y,z);
+				sharedCoordinates.put(hashKey, result);
+				return result;
+				}
+			}
+	}
+	
 	/**
 	 * @methodtype get
 	 */
@@ -71,30 +88,6 @@ public class CartesianCoordinate extends AbstractCoordinate{
 	 */
 	public double getZ() {
 		return this.z;
-	}
-	
-	/**
-	 * @methodtype set
-	 */
-	public double setX(double x) {
-		Assertion.assertIsValidDouble(x);
-		return this.x = x;
-	}
-	
-	/**
-	 * @methodtype set
-	 */
-	public double setY(double y) {
-		Assertion.assertIsValidDouble(y);
-		return this.y = y;
-	}
-	
-	/**
-	 * @methodtype set
-	 */
-	public double setZ(double z) {
-		Assertion.assertIsValidDouble(z);
-		return this.z = z;
 	}
 	
 	@Override
@@ -136,7 +129,6 @@ public class CartesianCoordinate extends AbstractCoordinate{
 		assertClassInvariants();
 		double longitude;
 		double latitude;
-		double radius;
 		
 		double squareX = Math.pow(this.x, 2);
 		double squareY = Math.pow(this.y, 2);
@@ -144,9 +136,8 @@ public class CartesianCoordinate extends AbstractCoordinate{
 
 		latitude = Math.toDegrees(Math.atan(this.y / this.x));
 		longitude = Math.toDegrees(Math.atan(Math.sqrt(squareX+squareY) / this.z));
-		radius = Math.sqrt(squareX + squareY + squareZ);
 		
-		return new SphericCoordinate(latitude, longitude, radius);
+		return SphericCoordinate.getInstance(latitude, longitude);
 	}
 
 	@Override

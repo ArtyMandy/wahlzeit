@@ -59,19 +59,19 @@ public class CartesianCoordinateTest {
 	
 	@Before 
 	public void setUp() {
-		coo1 = new CartesianCoordinate(0,0,0); // x: 0, y: 0, z: 0
-		coo2 = new CartesianCoordinate(2,2,2); // x: 2, y: 2, z: 2 
-		coo3 = new CartesianCoordinate(5,5,5); // x: 5, y: 5, z: 5
-		coo4 = new CartesianCoordinate(5,5,5);
-		coo5 = new CartesianCoordinate(0,0,0);
+		coo1 = CartesianCoordinate.getInstance(0,0,0); // x: 0, y: 0, z: 0
+		coo2 = CartesianCoordinate.getInstance(2,2,2); // x: 2, y: 2, z: 2 
+		coo3 = CartesianCoordinate.getInstance(5,5,5); // x: 5, y: 5, z: 5
+		coo4 = CartesianCoordinate.getInstance(5,5,5);
+		coo5 = CartesianCoordinate.getInstance(0,0,0);
 		//Moskau Latitude: 55.751244, Longtitude: 37.618423
-		coo6 = new CartesianCoordinate(2188.598471, 3214.537412, 5046.427148);
+		coo6 = CartesianCoordinate.getInstance(2188.598471, 3214.537412, 5046.427148);
 		//London Latitude: 51.508530 Longtitude: -0.076132
-		coo7 = new CartesianCoordinate(-5.268904832, -6.625945753, 6370.994376);
-		coo8 = new SphericCoordinate(51.508530, -0.076132);
-		coo9 = new CartesianCoordinate(10,10,10);
-		coo10 = new CartesianCoordinate(10,10,10);
-		coo11 = new CartesianCoordinate(20,20,20);
+		coo7 = CartesianCoordinate.getInstance(-5.268904832, -6.625945753, 6370.994376);
+		coo8 = SphericCoordinate.getInstance(51.508530, -0.076132);
+		coo9 = CartesianCoordinate.getInstance(10,10,10);
+		coo10 = CartesianCoordinate.getInstance(10,10,10);
+		coo11 = CartesianCoordinate.getInstance(20,20,20);
 	}
 	
 	/* Coordinates: coo1, coo2
@@ -134,12 +134,9 @@ public class CartesianCoordinateTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void assertWillFail() {
-		coo12 = new CartesianCoordinate(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
-		coo13 = new CartesianCoordinate(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
-		coo14 = new CartesianCoordinate(Double.NaN, Double.NaN, Double.NaN);
-		coo1.setX(Double.NaN);
-		coo1.setY(Double.POSITIVE_INFINITY);
-		coo1.setZ(Double.NEGATIVE_INFINITY);
+		coo12 = CartesianCoordinate.getInstance(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
+		coo13 = CartesianCoordinate.getInstance(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
+		coo14 = CartesianCoordinate.getInstance(Double.NaN, Double.NaN, Double.NaN);
 	}
 	
 	

@@ -24,6 +24,7 @@
  */
 package org.wahlzeit.model.coordinate;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 import org.wahlzeit.utils.Assertion;
@@ -32,18 +33,20 @@ import com.googlecode.objectify.annotation.Subclass;
 
 @Subclass
 public class SphericCoordinate extends AbstractCoordinate {
-
-	private double latitude;
-	private double longitude;
+	
+	private static HashMap<Integer, SphericCoordinate> sharedCoordinates = new HashMap<>();
+	
+	private final double latitude;
+	private final double longitude;
 	// Earthradius default value
-	private double radius = 6371.0;
+	private final double radius = 6371.0;
 	
 	/**
 	 * ctor
 	 * @param latitude
 	 * @param longitude
 	 */
-	public SphericCoordinate(double latitude, double longitude) {
+	private SphericCoordinate(double latitude, double longitude) {
 		Assertion.assertIsValidDouble(latitude);
 		Assertion.assertIsValidDouble(longitude);
 		
@@ -53,24 +56,22 @@ public class SphericCoordinate extends AbstractCoordinate {
 		assertClassInvariants();
 	}
 	
-	/**
-	 * ctor
-	 * @param latitude
-	 * @param longitude
-	 * @param radius
-	 */
-	public SphericCoordinate(double latitude, double longitude, double radius) {
-		Assertion.assertIsValidDouble(latitude);
-		Assertion.assertIsValidDouble(longitude);
-		Assertion.assertIsValidDouble(radius);
-		
-		this.latitude = latitude;
-		this.longitude = longitude;
-		this.radius = radius;
-		
-		assertClassInvariants();
+	public static SphericCoordinate getInstance(double latitude, double longitude) {
+		SphericCoordinate result;
+		synchronized(sharedCoordinates) {
+			int hashKey = Objects.hash(latitude, longitude);
+			
+			if(sharedCoordinates.containsKey(hashKey)){
+				result = sharedCoordinates.get(hashKey);
+				return result;
+			}
+			else {
+				result = new SphericCoordinate(latitude, longitude);
+				sharedCoordinates.put(hashKey, result);
+				return result;
+				}
+			}
 	}
-
 
 	/**
 	 * @methodtype get
@@ -93,33 +94,10 @@ public class SphericCoordinate extends AbstractCoordinate {
 		return this.radius;
 	}
 	
-	/**
-	 * @methodtype set
-	 */
-	public double setLat(double latitude) {
-		Assertion.assertIsValidDouble(latitude);
-		return this.latitude = latitude;
-	}
-	
-	/**
-	 * @methodtype set
-	 */
-	public double setLong(double longitude) {
-		Assertion.assertIsValidDouble(longitude);
-		return this.longitude = longitude;
-	}
-	
-	/**
-	 * @methodtype set
-	 */
-	public double setRadius(double radius) {
-		Assertion.assertIsValidDouble(radius);
-		return this.radius = radius;
-	}
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(latitude, longitude, radius);
+		return Objects.hash(latitude, longitude);
 	}
 	
 	@Override
@@ -138,8 +116,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 		SphericCoordinate input = coordinate.asSphericCoordinate();
 		
 		if(isDoubleEqual(input.latitude, this.latitude) &&
-				isDoubleEqual(input.longitude, this.longitude) &&
-				isDoubleEqual(input.radius, this.radius)) {
+				isDoubleEqual(input.longitude, this.longitude)) {
 			return true;		
 		}
 		return false;
@@ -154,9 +131,8 @@ public class SphericCoordinate extends AbstractCoordinate {
 		double y = radius * Math.sin(radiansLat) * Math.sin(radiansLong);
 		double z = radius * Math.cos(radiansLong);
 		
-		CartesianCoordinate coordinate = new CartesianCoordinate(x, y, z);
 		assertClassInvariants();
-		return coordinate;
+		return CartesianCoordinate.getInstance(x, y, z);
 	}
 
 	@Override

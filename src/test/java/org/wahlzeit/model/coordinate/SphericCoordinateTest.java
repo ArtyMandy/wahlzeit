@@ -53,17 +53,17 @@ public class SphericCoordinateTest {
 		//Nuremberg - Berlin SphericDistance: 377.56829689841425
 		//Munich - Berlin SphericDistance: 504.300829009964
 		//Nuremberg
-        coo1 = new SphericCoordinate(49.460983, 11.061859);
+        coo1 = SphericCoordinate.getInstance(49.460983, 11.061859);
 		//Munich
-		coo2 = new SphericCoordinate(48.137154, 11.576124);
+		coo2 = SphericCoordinate.getInstance(48.137154, 11.576124);
 		//Berlin
-		coo3 = new SphericCoordinate(52.520008, 13.404954);
+		coo3 = SphericCoordinate.getInstance(52.520008, 13.404954);
 		//Berlin Cartesian Coordinate
-		coo4 = new CartesianCoordinate(898.7324481, 1172.098186, 6197.427436);
+		coo4 = CartesianCoordinate.getInstance(898.7324481, 1172.098186, 6197.427436);
 		
-		coo5 = new SphericCoordinate(10.0, 10.0);
-		coo6 = new SphericCoordinate(10.0, 10.0);
-		coo7 = new SphericCoordinate(20.0, 10.0);
+		coo5 = SphericCoordinate.getInstance(10.0, 10.0);
+		coo6 = SphericCoordinate.getInstance(10.0, 10.0);
+		coo7 = SphericCoordinate.getInstance(20.0, 10.0);
 		
 	}
 	
@@ -97,12 +97,9 @@ public class SphericCoordinateTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void assertWillFail() {
-		coo8 = new SphericCoordinate(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
-		coo9 = new SphericCoordinate(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
-		coo10 = new SphericCoordinate(Double.NaN, Double.NaN, Double.NaN);
-		coo1.setLat(Double.NaN);
-		coo1.setLong(Double.POSITIVE_INFINITY);
-		coo1.setRadius(Double.NEGATIVE_INFINITY);	
+		coo8 = SphericCoordinate.getInstance(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
+		coo9 = SphericCoordinate.getInstance(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
+		coo10 = SphericCoordinate.getInstance(Double.NaN, Double.NaN);
 	}
 
 }
