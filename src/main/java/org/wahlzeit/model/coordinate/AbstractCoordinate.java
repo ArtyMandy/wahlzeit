@@ -25,7 +25,13 @@
 package org.wahlzeit.model.coordinate;
 
 import org.wahlzeit.utils.Assertion;
+import org.wahlzeit.utils.PatternInstance;
 
+
+@PatternInstance(
+		patternName = "Template",
+		participants = {"Coordinate", "CartesianCoordinate", "SphericCoordinate"}
+		)
 public abstract class AbstractCoordinate implements Coordinate{
 
 	public static final double DELTA = 0.0000001;  
