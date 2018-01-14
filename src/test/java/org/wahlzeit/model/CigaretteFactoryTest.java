@@ -58,8 +58,8 @@ public class CigaretteFactoryTest {
 	
 	@Test
 	public void checkPhotoWithLocation() {
-		firstPhoto.setLocation(new Location(new CartesianCoordinate(1,1,1)));
-		CartesianCoordinate co = new CartesianCoordinate(1,1,1);
+		firstPhoto.setLocation(new Location(CartesianCoordinate.getInstance(1,1,1)));
+		CartesianCoordinate co = CartesianCoordinate.getInstance(1,1,1);
 		assertEquals(co,firstPhoto.getLocation().getCoordinate());
 	}
 	

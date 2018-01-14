@@ -32,8 +32,7 @@ import com.googlecode.objectify.annotation.Subclass;
 @Subclass
 public class CigarettePhoto extends Photo {
 	
-	private String brand;
-	private String manufacturer;
+	private Cigarette cigarette;
 	
 	/**
 	 * @MethodType constructor
@@ -52,43 +51,21 @@ public class CigarettePhoto extends Photo {
 	/**
 	 * @MethodType constructor
 	 */
-	public CigarettePhoto(PhotoId myId, String brand, String manufacturer) {
+	public CigarettePhoto(PhotoId myId, Cigarette cigarette) {
 		super(myId);
-		Assertion.assertIsNotNull(brand);
-		Assertion.assertIsNotNull(manufacturer);
-		this.brand = brand;
-		this.manufacturer = manufacturer;
-	}
-	
-	/**
-	 * @MethodType get
-	 */
-	public String getBrand() {
-		return this.brand;
+		Assertion.assertIsNotNull(cigarette);
+		this.cigarette = cigarette;
 	}
 	/**
 	 * @MethodType get
 	 */
-	public String getManufacturer() {
-		return this.manufacturer;
-	}
-	
-	
-	/**
-	 * @MethodType set
-	 */
-	public void setBrand(String brand) {
-		Assertion.assertIsNotNull(brand);
-		this.brand = brand;
-		
+	public Cigarette getCigarette() {
+		return this.cigarette;
 	}
 	/**
 	 * @MethodType set
 	 */
-	public void setManufacturer(String manufacturer) {
-		Assertion.assertIsNotNull(manufacturer);
-			this.manufacturer = manufacturer;
+	public void setCigarette(Cigarette cigarette) {
+		this.cigarette = cigarette;
 	}
-	
-
 }
