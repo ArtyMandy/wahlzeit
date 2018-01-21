@@ -24,9 +24,9 @@
  */
 package org.wahlzeit.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.wahlzeit.services.ObjectManager;
 
@@ -34,15 +34,14 @@ public class CigaretteObjectManager extends ObjectManager {
 
 	private static CigaretteObjectManager cigaretteObjectManager = new CigaretteObjectManager();
 	
-	private List<CigaretteType> types = new ArrayList<CigaretteType>();
+	private Set<CigaretteType> types = new HashSet<CigaretteType>();
 	private HashMap<Integer, Cigarette> cigarettes = new HashMap<Integer, Cigarette>();
 	
 	
 	private CigaretteObjectManager() {
 		
 	}
-	
-	/**
+	/*
 	 * Singleton Access
 	 */
 	public static CigaretteObjectManager getInstance() {
@@ -70,7 +69,6 @@ public class CigaretteObjectManager extends ObjectManager {
 		CigaretteType cigtype = new CigaretteType(typeName, brand, manufacturer);
 		types.add(cigtype);
 	}
-	
 	/**
 	 * @MethodType query (get)
 	 */

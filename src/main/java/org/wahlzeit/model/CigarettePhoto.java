@@ -27,11 +27,12 @@ package org.wahlzeit.model;
 
 import org.wahlzeit.utils.Assertion;
 import com.googlecode.objectify.annotation.Subclass;
-
+import com.googlecode.objectify.annotation.Ignore;
 
 @Subclass
 public class CigarettePhoto extends Photo {
 	
+	@Ignore
 	private Cigarette cigarette;
 	
 	/**

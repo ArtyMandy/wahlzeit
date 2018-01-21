@@ -34,6 +34,7 @@ public class CigaretteType extends DataObject{
 
 	protected CigaretteType superType = null;
 	protected Set<CigaretteType> subTypes = new HashSet<CigaretteType>();
+	
 	private String typeName;
 	private String brand;
 	private String manufacturer;
@@ -110,6 +111,18 @@ public class CigaretteType extends DataObject{
 			if(type.hasInstance(cig)) {
 				return true;
 			}
+		}
+		return false;
+	}
+	/**
+	 * @MethodType boolean query
+	 * 
+	 * @return
+	 */
+	public boolean isSubType(CigaretteType cigType) {
+		Assertion.assertIsNotNull(cigType);
+		if(cigType.getSuperType() != null){
+			return true;
 		}
 		return false;
 	}
